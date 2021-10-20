@@ -52,3 +52,13 @@ def quick_testing():
     # plt.show()
     # plt.waitforbuttonpress()
 
+
+"""
+In the middle of the trees,
+From a day that was bight,
+A dark hopeless night,
+A man to the right,
+We all should fight,
+The firey sun,
+A bloody bird
+"""

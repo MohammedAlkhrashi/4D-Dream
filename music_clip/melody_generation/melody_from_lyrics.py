@@ -1,3 +1,5 @@
+# Forked from https://github.com/yy1lab/Lyrics-Conditioned-Neural-Melody-Generation
+
 import numpy as np
 import tensorflow as tf
 
@@ -21,7 +23,6 @@ def melody_from_lyrics(lyrics):
     for i in range(20):
         if i < length_song:
             print(lyrics[i][0])
-
 
             syll2Vec = syllModel.wv[lyrics[i][0]]
             word2Vec = wordModel.wv[lyrics[i][1]]
@@ -60,7 +61,7 @@ def melody_from_lyrics(lyrics):
         midi_pattern = utils.create_midi_pattern_from_discretized_data(
             sample[0:length_song]
         )
-        destination = "../test.mid"
+        destination = "../melody/test.mid"
         midi_pattern.write(destination)
 
         print("done")
