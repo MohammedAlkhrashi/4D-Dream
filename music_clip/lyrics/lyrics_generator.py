@@ -3,7 +3,12 @@ class LyricsGenerator:
         pass
 
     def generate(self):
-        return ["This is fire", "Under the sky", "on the beach"]
+        return [
+            "Love is the dear heart amid the flowers",
+            "Sweet as a light in a beating meadow",
+            "Hurried by her from her earthly hour",
+            "Hopeless the raging tempest of her woe",
+        ]
 
     def __call__(self):
         return self.generate()

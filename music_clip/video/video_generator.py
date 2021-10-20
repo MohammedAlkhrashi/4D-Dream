@@ -39,14 +39,15 @@ def morph_ffmpeg(paths, duration=10):
 def get_sort_key(path):
     image_num = path.split(".")[-2]
     folder_idx = path.split("idx")[0][-1]
-    return int(str(int(folder_idx) * 10000) + image_num)
+    return int(str(1000 ** int(folder_idx)) + image_num)
 
 
 def images_to_video_cv2(paths):
 
     img_array = []
-    for filename in sorted(paths, key=get_sort_key):
+    for filename in sorted(paths, key=get_sort_key)[30:]:
         try:
+            # print(f"{filename}: {get_sort_key(filename)}")
             img = cv2.imread(filename)
             height, width, layers = img.shape
             size = (width, height)
@@ -55,7 +56,7 @@ def images_to_video_cv2(paths):
             print("error")
             print(e)
 
-    out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 200, size)
+    out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 60, size)
 
     for i in range(len(img_array)):
         out.write(img_array[i])
@@ -88,13 +89,14 @@ def merge_images_into_video(folder_path, duration=10):
 class VideoGenerator:
     def __init__(self) -> None:
         self.dream = BigSleepImagine(
-            lr=5e-2,
+            lr=7e-2,
             save_every=1,
             save_progress=True,
-            # iterations=1000,
-            # epochs=1,
+            iterations=750,
+            epochs=1,
             save_best=True,
             open_folder=False,
+            image_size=128,
         )
 
         self.folder_path = (
@@ -106,7 +108,7 @@ class VideoGenerator:
         for idx, text in enumerate(lyrics):
             self.generate_images_from_text(text, idx)
 
-        # merge_images_into_video(self.folder_path)
+        merge_images_into_video(self.folder_path)
 
     def generate_images_from_text(self, text, idx):
         text_images_folder = f"{self.folder_path}/{idx}idx_{text.replace(' ','_')}"
@@ -115,3 +117,4 @@ class VideoGenerator:
             # self.dream.reset()  # maybe not resting can give interesting results?
             self.dream.set_text(text)
             self.dream()
+
