@@ -1,1 +1,1 @@
-from .sr import SR
+from .sr import SuperResolution

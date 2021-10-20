@@ -4,7 +4,6 @@ import contextlib
 from datetime import datetime
 from glob import glob
 
-from music_clip.super_resuoltion.sr import SR
 
 import cv2
 from tqdm import tqdm
@@ -45,13 +44,13 @@ def get_sort_key(path):
     return int(str(1000 ** int(folder_idx)) + image_num)
 
 
-def images_to_video_cv2(paths):
+def images_to_video_cv2_morph(paths, sr_model):
     img_array = []
-    sr = SR()
     for filename in tqdm(sorted(paths, key=get_sort_key)[:]):
         try:
             # print(f"{filename}: {get_sort_key(filename)}")
-            img = sr.upscale(cv2.imread(filename))
+            img = sr_model.upscale(cv2.imread(filename))
+            # img = cv2.imread(filename)
             height, width, layers = img.shape
             size = (width, height)
             img_array.append(img)
@@ -60,13 +59,12 @@ def images_to_video_cv2(paths):
             print(e)
 
     out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 60, size)
-
     for image in img_array:
         out.write(image)
     out.release()
 
 
-def merge_images_into_video(folder_path, duration=10):
+def merge_images_into_video(folder_path, sr_model=None):
     with cd_into_folder(folder_path):
         if not os.path.exists("video"):
             os.mkdir("video")
@@ -84,13 +82,11 @@ def merge_images_into_video(folder_path, duration=10):
 
         # can try other morphing methods
         # morph_ffmpeg(last_generated_images)
-
-        #
-        images_to_video_cv2(all_images_in_order)
+        images_to_video_cv2_morph(all_images_in_order, sr_model)
 
 
 class VideoGenerator:
-    def __init__(self) -> None:
+    def __init__(self, sr_model=None) -> None:
         self.dream = BigSleepImagine(
             lr=7e-2,
             save_every=1,
@@ -99,9 +95,9 @@ class VideoGenerator:
             epochs=1,
             save_best=True,
             open_folder=False,
-            image_size=128,
+            image_size=256,
         )
-
+        self.sr_model = sr_model
         self.folder_path = (
             f"generated_videos/{datetime.now().strftime('%m-%d_%H-%M-%S')}"
         )
@@ -111,7 +107,7 @@ class VideoGenerator:
         for idx, text in enumerate(lyrics):
             self.generate_images_from_text(text, idx)
 
-        merge_images_into_video(self.folder_path)
+        merge_images_into_video(self.folder_path, self.sr_model)
 
     def generate_images_from_text(self, text, idx):
         text_images_folder = f"{self.folder_path}/{idx}idx_{text.replace(' ','_')}"
