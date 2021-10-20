@@ -4,7 +4,10 @@ import contextlib
 from datetime import datetime
 from glob import glob
 
+from music_clip.super_resuoltion.sr import SR
+
 import cv2
+from tqdm import tqdm
 
 
 @contextlib.contextmanager
@@ -15,25 +18,25 @@ def cd_into_folder(folder_path):
     os.chdir(orignal_dir)
 
 
-def morph_ffmpeg(paths, duration=10):
-    cur_image = "0idx_This_is_fire\\This_is_fire.best.png"
-    next_image = "1idx_Under_the_night's_sky\\Under_the_night's_sky.best.png"
+# def morph_ffmpeg(paths, duration=10):
+#     cur_image = "0idx_This_is_fire\\This_is_fire.best.png"
+#     next_image = "1idx_Under_the_night's_sky\\Under_the_night's_sky.best.png"
 
-    commmand_one = []
-    command_two = []
-    for i, image_path in enumerate(paths):
-        commmand_one.append(f"-loop 1 -t 5 -i {image_path}")
-        command_two.append(
-            f"{i+1}format=yuva444p,fade=d=1:t=in:alpha=1,setpts=PTS-STARTPTS+{4*(i+1)}/TB[f{i}]"
-        )
+#     commmand_one = []
+#     command_two = []
+#     for i, image_path in enumerate(paths):
+#         commmand_one.append(f"-loop 1 -t 5 -i {image_path}")
+#         command_two.append(
+#             f"{i+1}format=yuva444p,fade=d=1:t=in:alpha=1,setpts=PTS-STARTPTS+{4*(i+1)}/TB[f{i}]"
+#         )
 
-    command = f'ffmpeg \
-        {" ".join(commmand_one)} \
-        -filter_complex \
-        "{";".join(command_two)} \
-        [0][f0]overlay[bg1];[bg1][f1]overlay[bg2];[bg2][f2]overlay[bg3]; \
-        [bg3][f3]overlay,format=yuv420p[v]" -map "[v]" -movflags +faststart out.mp4'
-    os.system(command)
+#     command = f'ffmpeg \
+#         {" ".join(commmand_one)} \
+#         -filter_complex \
+#         "{";".join(command_two)} \
+#         [0][f0]overlay[bg1];[bg1][f1]overlay[bg2];[bg2][f2]overlay[bg3]; \
+#         [bg3][f3]overlay,format=yuv420p[v]" -map "[v]" -movflags +faststart out.mp4'
+#     os.system(command)
 
 
 def get_sort_key(path):
@@ -43,12 +46,12 @@ def get_sort_key(path):
 
 
 def images_to_video_cv2(paths):
-
     img_array = []
-    for filename in sorted(paths, key=get_sort_key)[30:]:
+    sr = SR()
+    for filename in tqdm(sorted(paths, key=get_sort_key)[30:]):
         try:
             # print(f"{filename}: {get_sort_key(filename)}")
-            img = cv2.imread(filename)
+            img = sr.upscale(cv2.imread(filename))
             height, width, layers = img.shape
             size = (width, height)
             img_array.append(img)
