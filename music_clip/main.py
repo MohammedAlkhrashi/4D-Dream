@@ -12,17 +12,17 @@ from music_clip import super_resuoltion
 
 
 def main():
-    # quick_testing()
+    quick_testing()
 
-    lyrics_gen = LyricsGenerator()
-    lyrics = lyrics_gen()
+    # lyrics_gen = LyricsGenerator()
+    # lyrics = lyrics_gen()
 
-    music_gen = MusicGenerator()
-    music = music_gen()
+    # music_gen = MusicGenerator()
+    # music = music_gen()
 
-    super_resuoltion_model = SuperResolution("fsrcnn")
-    video_gen = VideoGenerator(sr_model=super_resuoltion_model)
-    video_gen.generate_from_lyrics(lyrics)
+    # super_resuoltion_model = SuperResolution("fsrcnn")
+    # video_gen = VideoGenerator(sr_model=super_resuoltion_model)
+    # video_gen.generate_from_lyrics(lyrics)
 
 
 def quick_testing():

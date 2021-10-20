@@ -92,10 +92,10 @@ class VideoGenerator:
             save_every=1,
             save_progress=True,
             iterations=750,
-            epochs=1,
+            epochs=2,
             save_best=True,
             open_folder=False,
-            image_size=256,
+            image_size=512,
         )
         self.sr_model = sr_model
         self.folder_path = (
