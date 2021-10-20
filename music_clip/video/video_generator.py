@@ -31,7 +31,7 @@ def images_to_video_cv2_morph(paths, sr_model):
             print(e)
 
     out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 60, size)
-    for image in img_array:
+    for image in tqdm(img_array):
         out.write(image)
     out.release()
 
