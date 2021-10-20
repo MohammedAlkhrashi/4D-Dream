@@ -48,7 +48,7 @@ def get_sort_key(path):
 def images_to_video_cv2(paths):
     img_array = []
     sr = SR()
-    for filename in tqdm(sorted(paths, key=get_sort_key)[30:]):
+    for filename in tqdm(sorted(paths, key=get_sort_key)[:]):
         try:
             # print(f"{filename}: {get_sort_key(filename)}")
             img = sr.upscale(cv2.imread(filename))
@@ -61,8 +61,8 @@ def images_to_video_cv2(paths):
 
     out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 60, size)
 
-    for i in range(len(img_array)):
-        out.write(img_array[i])
+    for image in img_array:
+        out.write(image)
     out.release()
 
 
