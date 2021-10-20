@@ -3,7 +3,7 @@ class LyricsGenerator:
         pass
 
     def generate(self):
-        return ["This is fire", "Under the night's sky", "With you baby"]
+        return ["This is fire", "Under the sky", "on the beach"]
 
     def __call__(self):
         return self.generate()

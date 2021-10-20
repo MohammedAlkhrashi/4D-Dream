@@ -2,6 +2,8 @@ from .lyrics import LyricsGenerator
 from .music import MusicGenerator
 from .video import VideoGenerator
 
+from .video.video_generator import merge_images_into_video
+
 
 def main():
     lyrics_gen = LyricsGenerator()
@@ -10,8 +12,8 @@ def main():
     music_gen = MusicGenerator()
     music = music_gen()
 
-    video_gen = VideoGenerator()
-    video = video_gen()
+    # video_gen = VideoGenerator()
+    # video_gen.generate_from_lyrics(lyrics)
 
-    print("ok")
-
+    test_folder = "generated_videos/10-20_15-16-50"
+    merge_images_into_video(test_foldVker)
