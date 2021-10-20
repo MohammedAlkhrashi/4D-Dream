@@ -6,4 +6,4 @@ class MusicGenerator:
         return "?"
 
     def __call__(self):
-        return self.generate
+        return self.generate()
