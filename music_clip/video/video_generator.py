@@ -36,15 +36,26 @@ def morph_ffmpeg(paths, duration=10):
     os.system(command)
 
 
+def get_sort_key(path):
+    image_num = path.split(".")[-2]
+    folder_idx = path.split("idx")[0][-1]
+    return int(str(int(folder_idx) * 10000) + image_num)
+
+
 def images_to_video_cv2(paths):
 
     img_array = []
-    for filename in paths:
-        img = cv2.imread(filename)
-        height, width, layers = img.shape
-        size = (width, height)
-        img_array.append(img)
-    out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 15, size)
+    for filename in sorted(paths, key=get_sort_key):
+        try:
+            img = cv2.imread(filename)
+            height, width, layers = img.shape
+            size = (width, height)
+            img_array.append(img)
+        except Exception as e:
+            print("error")
+            print(e)
+
+    out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 200, size)
 
     for i in range(len(img_array)):
         out.write(img_array[i])
@@ -71,7 +82,7 @@ def merge_images_into_video(folder_path, duration=10):
         # morph_ffmpeg(last_generated_images)
 
         #
-        # images_to_video_cv2(all_images_in_order)
+        images_to_video_cv2(all_images_in_order)
 
 
 class VideoGenerator:
