@@ -18,7 +18,8 @@ def main():
     lyrics = lyrics_gen()
 
     music_gen = MusicGenerator()
-    music = music_gen()
+    music_gen.generate_initial_melody(lyrics)
+    music_gen.harmonize_melody()
 
     super_resuoltion_model = SuperResolution("fsrcnn")
     video_gen = VideoGenerator(sr_model=super_resuoltion_model)
