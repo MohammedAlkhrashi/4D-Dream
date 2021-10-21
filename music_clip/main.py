@@ -1,5 +1,5 @@
 from .lyrics import LyricsGenerator
-from .music import MusicGenerator
+# from .music import MusicGenerator
 from .video import VideoGenerator
 
 from .video.video_generator import merge_images_into_video
@@ -14,15 +14,16 @@ from music_clip import super_resuoltion
 def main():
     quick_testing()
 
-    # lyrics_gen = LyricsGenerator()
-    # lyrics = lyrics_gen()
+    lyrics_gen = LyricsGenerator()
+    lyrics = lyrics_gen()
 
-    # music_gen = MusicGenerator()
-    # music = music_gen()
+    music_gen = MusicGenerator()
+    music_gen.generate_initial_melody(lyrics)
+    music_gen.harmonize_melody()
 
-    # super_resuoltion_model = SuperResolution("fsrcnn")
-    # video_gen = VideoGenerator(sr_model=super_resuoltion_model)
-    # video_gen.generate_from_lyrics(lyrics)
+    super_resuoltion_model = SuperResolution("fsrcnn")
+    video_gen = VideoGenerator(sr_model=super_resuoltion_model)
+    video_gen.generate_from_lyrics(lyrics)
 
 
 def quick_testing():
@@ -51,3 +52,13 @@ def quick_testing():
     # plt.show()
     # plt.waitforbuttonpress()
 
+
+"""
+In the middle of the trees,
+From a day that was bight,
+A dark hopeless night,
+A man to the right,
+We all should fight,
+The firey sun,
+A bloody bird
+"""

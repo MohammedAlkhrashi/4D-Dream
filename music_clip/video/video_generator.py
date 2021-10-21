@@ -1,41 +1,13 @@
 import os
+
+from music_clip.common import cd_into_folder
 from .big_sleep import BigSleepImagine
-import contextlib
 from datetime import datetime
 from glob import glob
 
 
 import cv2
 from tqdm import tqdm
-
-
-@contextlib.contextmanager
-def cd_into_folder(folder_path):
-    orignal_dir = os.getcwd()
-    os.chdir(folder_path)
-    yield
-    os.chdir(orignal_dir)
-
-
-# def morph_ffmpeg(paths, duration=10):
-#     cur_image = "0idx_This_is_fire\\This_is_fire.best.png"
-#     next_image = "1idx_Under_the_night's_sky\\Under_the_night's_sky.best.png"
-
-#     commmand_one = []
-#     command_two = []
-#     for i, image_path in enumerate(paths):
-#         commmand_one.append(f"-loop 1 -t 5 -i {image_path}")
-#         command_two.append(
-#             f"{i+1}format=yuva444p,fade=d=1:t=in:alpha=1,setpts=PTS-STARTPTS+{4*(i+1)}/TB[f{i}]"
-#         )
-
-#     command = f'ffmpeg \
-#         {" ".join(commmand_one)} \
-#         -filter_complex \
-#         "{";".join(command_two)} \
-#         [0][f0]overlay[bg1];[bg1][f1]overlay[bg2];[bg2][f2]overlay[bg3]; \
-#         [bg3][f3]overlay,format=yuv420p[v]" -map "[v]" -movflags +faststart out.mp4'
-#     os.system(command)
 
 
 def get_sort_key(path):
@@ -59,7 +31,7 @@ def images_to_video_cv2_morph(paths, sr_model):
             print(e)
 
     out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 60, size)
-    for image in img_array:
+    for image in tqdm(img_array):
         out.write(image)
     out.release()
 

@@ -1,0 +1,1 @@
+from .melody_from_lyrics import melody_from_lyrics

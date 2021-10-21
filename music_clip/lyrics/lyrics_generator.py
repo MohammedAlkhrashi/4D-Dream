@@ -4,7 +4,7 @@ class LyricsGenerator:
 
     def generate(self):
         return [
-            "Love is the dear heart amid the flowers",
+            "Love is the dear heart the flowers",
             "Sweet as a light in a beating meadow",
             "Hurried by her from her earthly hour",
             "Hopeless the raging tempest of her woe",
