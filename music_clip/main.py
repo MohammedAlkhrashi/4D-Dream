@@ -14,22 +14,22 @@ from music_clip import super_resuoltion
 def main():
     quick_testing()
 
-    lyrics_gen = LyricsGenerator()
-    lyrics = lyrics_gen()
+    # lyrics_gen = LyricsGenerator()
+    # lyrics = lyrics_gen()
 
-    music_gen = MusicGenerator()
-    music_gen.generate_initial_melody(lyrics)
-    music_gen.harmonize_melody()
+    # music_gen = MusicGenerator()
+    # music_gen.generate_initial_melody(lyrics)
+    # music_gen.harmonize_melody()
 
-    super_resuoltion_model = SuperResolution("fsrcnn")
-    video_gen = VideoGenerator(sr_model=super_resuoltion_model)
-    video_gen.generate_from_lyrics(lyrics)
+    # super_resuoltion_model = SuperResolution("fsrcnn")
+    # video_gen = VideoGenerator(sr_model=super_resuoltion_model)
+    # video_gen.generate_from_lyrics(lyrics)
 
 
 def quick_testing():
     super_resuoltion_model = SuperResolution("fsrcnn")
 
-    test_folder = "generated_videos/10-20_21-30-53"
+    test_folder = "generated_videos/10-21_09-56-15"
     merge_images_into_video(test_folder, super_resuoltion_model)
 
     # filename = "generated_videos/10-20_17-50-46/3idx_Hopeless_the_raging_tempest_of_her_woe/Hopeless_the_raging_tempest_of_her_woe.png"

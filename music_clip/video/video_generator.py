@@ -30,7 +30,7 @@ def images_to_video_cv2_morph(paths, sr_model):
             print("error")
             print(e)
 
-    out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 60, size)
+    out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 280, size)
     for image in tqdm(img_array):
         out.write(image)
     out.release()
@@ -61,9 +61,9 @@ class VideoGenerator:
     def __init__(self, sr_model=None) -> None:
         self.dream = BigSleepImagine(
             lr=7e-2,
-            save_every=1,
+            save_every=3,
             save_progress=True,
-            iterations=750,
+            iterations=1000,
             epochs=2,
             save_best=True,
             open_folder=False,
