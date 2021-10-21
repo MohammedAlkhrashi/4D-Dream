@@ -25,8 +25,8 @@ class MusicGenerator:
     def generate_initial_melody(self, lyrics):
         syllables = get_syllables(" ".join(lyrics))
         with cd_into_folder("music_clip/melody_generation"):
-
             # Forked from https://github.com/yy1lab/Lyrics-Conditioned-Neural-Melody-Generation
+            # Paper: https://arxiv.org/pdf/1908.05551.pdf
             melody_from_lyrics(syllables)
 
     def harmonize_melody(self):

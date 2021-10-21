@@ -1,4 +1,5 @@
 # Forked from https://github.com/yy1lab/Lyrics-Conditioned-Neural-Melody-Generation
+# Paper: https://arxiv.org/pdf/1908.05551.pdf
 
 import numpy as np
 import tensorflow as tf
