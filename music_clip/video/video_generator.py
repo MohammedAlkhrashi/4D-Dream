@@ -17,21 +17,35 @@ def get_sort_key(path):
 
 
 def images_to_video_cv2_morph(paths, sr_model):
-
-    img = sr_model.upscale(cv2.imread(paths[0]))
+    img = cv2.imread(paths[0])
     height, width, _ = img.shape
     size = (width, height)
     out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 340, size)
     for filename in tqdm(sorted(paths, key=get_sort_key)[:]):
         try:
             # print(f"{filename}: {get_sort_key(filename)}")
-            img = sr_model.upscale(cv2.imread(filename))
+            img = cv2.imread(filename)
             out.write(img)
             # img = cv2.imread(filename)
         except Exception as e:
             print("error")
             print(e)
     out.release()
+
+
+def upscale_paths(paths, sr_model, every=1):
+    os.mkdir("upscaled_images")
+    upscaled_paths = []
+    count = 1000000
+    for i, path in enumerate(tqdm(paths)):
+        if not i % every:
+            continue
+        img = sr_model.upscale(cv2.imread(path))
+        image_path = f"upscaled_images/{count}.png"
+        cv2.imwrite(image_path, img)
+        upscaled_paths.append(image_path)
+        count += 1
+    return upscale_paths
 
 
 def merge_images_into_video(folder_path, sr_model=None):
@@ -50,8 +64,13 @@ def merge_images_into_video(folder_path, sr_model=None):
             for image_path in paths[:-2]:
                 all_images_in_order.append(image_path)
 
-        # can try other morphing methods
-        # morph_ffmpeg(last_generated_images)
+        all_images_in_order = sorted(all_images_in_order, key=get_sort_key)
+        if sr_model:
+            if not os.path.exists("upscaled_images"):
+                all_images_in_order = upscale_paths(all_images_in_order, sr_model)
+            else:
+                all_images_in_order = glob("./upscaled_images/*")
+
         images_to_video_cv2_morph(all_images_in_order, sr_model)
 
 
