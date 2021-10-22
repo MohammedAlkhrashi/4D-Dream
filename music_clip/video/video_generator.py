@@ -17,22 +17,20 @@ def get_sort_key(path):
 
 
 def images_to_video_cv2_morph(paths, sr_model):
-    img_array = []
+
+    img = sr_model.upscale(cv2.imread(paths[0]))
+    height, width, _ = img.shape
+    size = (width, height)
+    out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 340, size)
     for filename in tqdm(sorted(paths, key=get_sort_key)[:]):
         try:
             # print(f"{filename}: {get_sort_key(filename)}")
             img = sr_model.upscale(cv2.imread(filename))
+            out.write(img)
             # img = cv2.imread(filename)
-            height, width, layers = img.shape
-            size = (width, height)
-            img_array.append(img)
         except Exception as e:
             print("error")
             print(e)
-
-    out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 280, size)
-    for image in tqdm(img_array):
-        out.write(image)
     out.release()
 
 
@@ -61,10 +59,10 @@ class VideoGenerator:
     def __init__(self, sr_model=None) -> None:
         self.dream = BigSleepImagine(
             lr=7e-2,
-            save_every=3,
+            save_every=1,
             save_progress=True,
             iterations=1000,
-            epochs=2,
+            epochs=5,
             save_best=True,
             open_folder=False,
             image_size=512,
