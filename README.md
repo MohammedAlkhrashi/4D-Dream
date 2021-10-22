@@ -35,6 +35,6 @@ MusicAutoBot.com for remixing pitch/rhythm and harmonizing
 FSRCNN a CNN Super Resolution model that was used to upscale (4x) the frames of the video.
 [https://arxiv.org/abs/1608.00367](https://arxiv.org/abs/1608.00367)
 
-Google' Verse by Verse model to generate the lyrics of the poem. 
 
-[https://sites.research.google/versebyverse/](https://sites.research.google/versebyverse/)
+
+[Google' Verse by Verse model to generate the lyrics of the poem. /](https://sites.research.google/versebyverse/)
