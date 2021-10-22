@@ -37,4 +37,4 @@ FSRCNN a CNN Super Resolution model that was used to upscale (4x) the frames of 
 
 
 
-[Google' Verse by Verse model to generate the lyrics of the poem. /](https://sites.research.google/versebyverse/)
+[Google' Verse by Verse model to generate the lyrics of the poem.](https://sites.research.google/versebyverse/)
