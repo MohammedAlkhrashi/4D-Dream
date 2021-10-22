@@ -29,7 +29,7 @@ The Combination of BigGAN and Open AI's CLIP was used to create the text-to-imag
 
 Generating the music
 
-[MusicAutoBot.com for remixing pitch/rhythm and harmonizing]
+MusicAutoBot.com for remixing pitch/rhythm and harmonizing
 (http://musicautobot.com/)
 
 FSRCNN a CNN Super Resolution model that was used to upscale (4x) the frames of the video.
