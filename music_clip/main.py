@@ -7,7 +7,7 @@ from .lyrics import LyricsGenerator
 # from .music import MusicGenerator
 from .video import VideoGenerator
 
-from .video.video_generator import merge_images_into_video
+# from .video.video_generator import merge_images_into_video
 
 from .super_resuoltion import SuperResolution, SuperReslutionV2
 import cv2
@@ -17,9 +17,9 @@ import os
 
 import tempfile
 
-# IMAGEMAGICK_BINARY = os.getenv(
-#     "IMAGEMAGICK_BINARY", "C:\Program Files\ImageMagick-7.0.8-Q16\magick.exe"
-# )
+IMAGEMAGICK_BINARY = os.getenv(
+    "IMAGEMAGICK_BINARY", "C:\Program Files\ImageMagick-7.0.8-Q16\magick.exe"
+)
 
 
 def main():
@@ -43,6 +43,7 @@ def quick_testing():
 
     test_folder = "generated_videos/10-21_09-56-15"
     merge_images_into_video(test_folder, super_resuoltion_model)
+    return
 
     return
 

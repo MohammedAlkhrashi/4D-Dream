@@ -11,7 +11,7 @@ import os
 from gensim.models import Word2Vec
 
 
-def melody_from_lyrics(lyrics):
+def melody_from_lyrics(lyrics, filename='test.mid'):
     syll_model_path = "./enc_models/syllEncoding_20190419.bin"
     word_model_path = "./enc_models/wordLevelEncoder_20190419.bin"
     syllModel = Word2Vec.load(syll_model_path)
@@ -23,10 +23,15 @@ def melody_from_lyrics(lyrics):
 
     for i in range(20):
         if i < length_song:
-            print(lyrics[i][0])
 
-            syll2Vec = syllModel.wv[lyrics[i][0]]
-            word2Vec = wordModel.wv[lyrics[i][1]]
+            print(lyrics[i][0])
+            try:
+                syll2Vec = syllModel.wv[lyrics[i][0]]
+                word2Vec = wordModel.wv[lyrics[i][1]]
+            except:
+                print('AAAA')
+                syll2Vec = syllModel.wv['a']
+                word2Vec = wordModel.wv['WORD']
             cond.append(np.concatenate((syll2Vec, word2Vec)))
         else:
             cond.append(np.concatenate((syll2Vec, word2Vec)))
@@ -62,7 +67,7 @@ def melody_from_lyrics(lyrics):
         midi_pattern = utils.create_midi_pattern_from_discretized_data(
             sample[0:length_song]
         )
-        destination = "../melody/test.mid"
+        destination = f"../melody/{filename}"
         midi_pattern.write(destination)
 
         print("done")
