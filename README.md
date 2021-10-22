@@ -5,7 +5,7 @@ To produce our video clip we enhanced existing state-of-the-art methods for text
 
 The lyrics are also fed into a music generation model that outputs a complimentary, singable, musical piece, saving you the hard work of melodizing any form of poetic verse.
 
-# Video Output
+# Samples
  [Video 1](https://www.youtube.com/watch?v=UFmA7bWlP1k)
  
  [Video 2](https://www.youtube.com/watch?v=OoNonzv85IM)
