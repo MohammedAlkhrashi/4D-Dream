@@ -27,9 +27,8 @@ A limitation of the model is that it outputs relatively small images that are no
 The Combination of BigGAN and Open AI's CLIP was used to create the text-to-image model that generated all the frames of the video.
 [https://github.com/lucidrains/big-sleep](https://github.com/lucidrains/big-sleep)
 
-Generating the music
 
-MusicAutoBot.com for remixing pitch/rhythm and harmonizing
+Generating the music MusicAutoBot.com for remixing pitch/rhythm and harmonizing
 (http://musicautobot.com/)
 
 FSRCNN a CNN Super Resolution model that was used to upscale (4x) the frames of the video.
