@@ -26,7 +26,6 @@ class MusicGenerator:
         # autobot.add_harmony()
 
     def generate_initial_melody(self, lyrics):
-        transitions = []
         melody = mido.MidiFile()
         melody.add_track()
         melody.add_track()
@@ -40,7 +39,7 @@ class MusicGenerator:
 
         note_count = len(get_syllables(" ".join(lyrics)))
         print('NOTE COUNT', note_count)
-        for i in range(note_count):
+        for _ in range(note_count):
             note = choice([67, 69, 71, 72, 74, 76, 77, 79, 81, 83])
             melody.tracks[1].append(
                 mido.Message('note_on', channel=0, note=note, velocity=100, time=0)

@@ -12,6 +12,7 @@ from .music import MusicGenerator
 
 
 def main():
+    
     lyrics = [
 	"A calm summer day,",
 	"And the soft rosy lights are red with rain.",
@@ -28,11 +29,11 @@ def main():
     music_gen = MusicGenerator()
     music_gen.generate_initial_melody(lyrics)
     music_gen.harmonize_melody()
-    # music_gen.autobot.autocomplete()
+    music_gen.autobot.autocomplete()
 
-    # super_resuoltion_model = SuperResolution("fsrcnn")
-    # video_gen = VideoGenerator(sr_model=super_resuoltion_model)
-    # video_gen.generate_from_lyrics(lyrics)
+    super_resuoltion_model = SuperResolution("fsrcnn")
+    video_gen = VideoGenerator(sr_model=super_resuoltion_model)
+    video_gen.generate_from_lyrics(lyrics)
 
 
 def quick_testing():
