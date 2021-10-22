@@ -1,29 +1,38 @@
-from .lyrics import LyricsGenerator
+# from .lyrics import LyricsGenerator
 from .music import MusicGenerator
-from .video import VideoGenerator
+# from .video import VideoGenerator
 
-from .video.video_generator import merge_images_into_video
+# from .video.video_generator import merge_images_into_video
 
-from .super_resuoltion import SuperResolution
-import cv2
+# from .super_resuoltion import SuperResolution
+# import cv2
 
 
-from music_clip import super_resuoltion
+# from music_clip import super_resuoltion
 
 
 def main():
+    lyrics = [
+	"A calm summer day,",
+	"And the soft rosy lights are red with rain.",
+	"Bright as the days these low butterflies play,",
+	"Across the east the yellow daisies lain!",
+	"Hopeless the raging tempest of night's woe",
+	"Within the shadowless, eternal skies.",
+	"Amid this soft transporting light of snow,",
+	"A baleful light of morn, a seething eye!"
+]
     # quick_testing()
 
-    lyrics_gen = LyricsGenerator()
-    lyrics = lyrics_gen()
 
     music_gen = MusicGenerator()
     music_gen.generate_initial_melody(lyrics)
     music_gen.harmonize_melody()
+    # music_gen.autobot.autocomplete()
 
-    super_resuoltion_model = SuperResolution("fsrcnn")
-    video_gen = VideoGenerator(sr_model=super_resuoltion_model)
-    video_gen.generate_from_lyrics(lyrics)
+    # super_resuoltion_model = SuperResolution("fsrcnn")
+    # video_gen = VideoGenerator(sr_model=super_resuoltion_model)
+    # video_gen.generate_from_lyrics(lyrics)
 
 
 def quick_testing():
