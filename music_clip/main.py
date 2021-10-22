@@ -4,7 +4,7 @@ from textwrap import fill
 from moviepy.video.VideoClip import TextClip
 from .lyrics import LyricsGenerator
 
-# from .music import MusicGenerator
+from .music import MusicGenerator
 from .video import VideoGenerator
 
 # from .video.video_generator import merge_images_into_video
@@ -27,9 +27,9 @@ def main():
     lyrics_gen = LyricsGenerator()
     lyrics = lyrics_gen()
 
-    # music_gen = MusicGenerator()
-    # music_gen.generate_initial_melody(lyrics)
-    # music_gen.harmonize_melody()
+    music_gen = MusicGenerator()
+    music_gen.generate_initial_melody(lyrics)
+    music_gen.harmonize_melody()
 
     super_resuoltion_model = SuperResolution("fsrcnn")
     video_gen = VideoGenerator(sr_model=super_resuoltion_model)
