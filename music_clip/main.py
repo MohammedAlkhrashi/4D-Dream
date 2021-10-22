@@ -3,7 +3,8 @@ from textwrap import fill
 
 from moviepy.video.VideoClip import TextClip
 from .lyrics import LyricsGenerator
-from .music import MusicGenerator
+
+# from .music import MusicGenerator
 from .video import VideoGenerator
 
 from .video.video_generator import merge_images_into_video
@@ -40,7 +41,7 @@ def quick_testing():
 
     super_resuoltion_model = SuperResolution("fsrcnn")
 
-    test_folder = "generated_videos/99"
+    test_folder = "generated_videos/10-21_09-56-15"
     merge_images_into_video(test_folder, super_resuoltion_model)
 
     return

@@ -20,9 +20,8 @@ def images_to_video_cv2_morph(paths, sr_model):
     img = cv2.imread(paths[0])
     height, width, _ = img.shape
     size = (width, height)
-    print(size)
-    out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 60, size)
-    for filename in tqdm(paths):
+    out = cv2.VideoWriter("project.avi", cv2.VideoWriter_fourcc(*"DIVX"), 340, size)
+    for filename in tqdm(sorted(paths, key=get_sort_key)[:]):
         try:
             # print(f"{filename}: {get_sort_key(filename)}")
             img = cv2.imread(filename)
@@ -81,8 +80,8 @@ class VideoGenerator:
             lr=7e-2,
             save_every=1,
             save_progress=True,
-            iterations=750,
-            epochs=2,
+            iterations=1000,
+            epochs=5,
             save_best=True,
             open_folder=False,
             image_size=512,
