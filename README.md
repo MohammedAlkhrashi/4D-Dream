@@ -1,4 +1,4 @@
-# 4D-Dream
+# 4D-Dream (AI Artathon 2021)
 A fully AI-generated artistic piece that features all the components needed for a music video; the music, lyrics, and video clip. The lyrics can be composed manually or through the use of an AI. In our case, we generated a poem as our lyrics using Google's Verse by Verse model.
 
 To produce our video clip we enhanced existing state-of-the-art methods for text-to-image generation to create an innovative 'text-to-video' generation method or more specifically 'lyrics-to-music video'. This technique can produce extremely artistic and awe-inspiring videos that relate directly to the input text or lyrics.  
@@ -6,7 +6,7 @@ To produce our video clip we enhanced existing state-of-the-art methods for text
 The lyrics are also fed into a music generation model that outputs a complimentary, singable, musical piece, saving you the hard work of melodizing any form of poetic verse.
 
 # Samples
- [Video 1](https://www.youtube.com/watch?v=UFmA7bWlP1k)
+ [Video 1](https://www.youtube.com/watch?v=UFmA7bWlP1k) (Artathon Submission)
  
  [Video 2](https://www.youtube.com/watch?v=OoNonzv85IM)
  
